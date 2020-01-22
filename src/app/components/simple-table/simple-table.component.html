@@ -1,0 +1,81 @@
+<div class="app-table">
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search"
+      aria-label="Search Box"
+      [formControl]="filterField"
+    />
+  </div>
+  <table class="table" *ngIf="filteredItems">
+    <thead>
+      <tr>
+        <td
+          class="table-column-header table-column-header-id"
+          [ngClass]="{ active: sortedBy === 'id' }"
+          (click)="sortByColumn('id')"
+        >
+          id
+        </td>
+        <td
+          class="table-column-header table-column-header-name"
+          [ngClass]="{ active: sortedBy === 'name' }"
+          (click)="sortByColumn('name')"
+        >
+          name
+        </td>
+        <td
+          class="table-column-header table-column-header-description"
+          [ngClass]="{ active: sortedBy === 'description' }"
+          (click)="sortByColumn('description')"
+        >
+          description
+        </td>
+        <td
+          class="table-column-header table-column-header-date"
+          [ngClass]="{ active: sortedBy === 'date' }"
+          (click)="sortByColumn('date')"
+        >
+          date
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of page">
+        <td class="table-value table-value-id">{{ item.id }}</td>
+        <td class="table-value table-value-name">{{ item.name }}</td>
+        <td class="table-value table-value-description">
+          {{ item.description }}
+        </td>
+        <td class="table-value table-value-date">
+          {{ item.date | date: dateFormat }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="table-pagination d-flex justify-content-center">
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item">
+          <span class="page-link" (click)="currentPage = currentPage - 1"
+            >Previous</span
+          >
+        </li>
+        <li *ngFor="let pageNumber of pages; let i = index; trackBy: pagesTrackBy" class="page-item">
+          <span
+            class="page-link"
+            (click)="currentPage = pageNumber"
+            [ngClass]="{ active: currentPage === pageNumber }"
+            >{{ pageNumber }}</span
+          >
+        </li>
+        <li class="page-item">
+          <span class="page-link" (click)="currentPage = currentPage + 1"
+            >Next</span
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

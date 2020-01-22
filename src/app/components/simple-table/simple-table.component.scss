@@ -1,0 +1,24 @@
+@mixin active {
+  background-color: #444;
+  color: #ddd;
+}
+
+.table-column-heder {
+  cursor: pointer;
+  &.active {
+    @include active;
+  }
+}
+
+.table-value {
+  white-space: nowrap;
+  &-description {
+    white-space: normal;
+  }
+}
+.page-link {
+  cursor: pointer;
+}
+.page-link.active {
+  @include active;
+}
